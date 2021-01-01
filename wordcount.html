@@ -1,0 +1,123 @@
+<!DOCTYPE HTML>
+<html lang = "en">
+<head>
+<title>formDemo.html</title>
+    <meta charset = "UTF-8" />
+	<link rel="stylesheet" href="textarea.css">
+	<link href="https://fonts.googleapis.com/css2?family=Redressed&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="container-grid">
+
+	<h1 style="text-align:center; font-size:50px; font-family: 'Redressed', cursive;">THULASI ASSESMENT PAGE</h1>
+	<hr>
+	
+	<form action=""  name="myform">      
+		<p style="font-size:40px; font-family:poppins; text-align:left;"> Enter your text: </p><br>
+	<label> HAI USER INPUT:<input class="textarea"  name="inStr" placeholder="enter your test case" id="txtWordCounter" size="" style="height:100px;" ></label>
+	<br>
+	<div class="nestedgrid">
+	<label style="color:white; font-size: 40px; "> ABOUT ME: </label>
+	<p style="font-size: 20px; color:white;">I am THULASI PRABHA SARAVANAN . I have done my graduation  from SSMIET. I am a fresher and I am currently looking for a suitable job. In the past I have volunteered for many social work . I am willing to travel for the job. I have a very dynamic personality. I am always planning a step ahead in life as I simply hate falling back. I can handle difficult situations calmly and can work along with my team mates in a very friendly MANNER. Also, I make sure to give my 100% even during my solo projects. Apart from this, I am interested in various extracurricular activities and always find time to do stuff like listening to music, writing poetry and all. I am very particular about my schedule and always manage my time efficiently so as to fit everything without any overlaps. I am a fresher and I am willing to take any kind of opportunity to improve myself. <q>-THULASI PRABHA</q></p></div>
+	<br>  
+<div style="float:left">
+	<input class="button1" type="button" onclick="javascript:wordCounter('txtWordCounter');" value="Count Words" title="Click here to validate" style="width:100px ;
+height:50px;" />
+    <input class ="button2" type="button"  style="width:150px ; height:50px;" value="TitleInput Text" onClick="capWords(document.myform.inStr.value)";>
+	<input class ="button3" type="button"  style="width:150px ; height:50px;" value="Unique words" onClick="uniqueWordCount(document.myform.inStr.value)";><br>
+	<label><input name="checkIgnoreOneLetterWord" type="checkbox" id="checkIgnoreOneLetterWord" value="1" />Ignore one letter words/characters as a word. </label> <br> <br>
+<label><input name="countStandardWords" type="checkbox" id="countStandardWords" value="1" checked="checked" />Count 'a'. 'an', 'the' as words. </label> <br>
+<br>
+ </div>
+ 
+ 
+<textarea class="textarea" id="output" title="RESULT:" name="result" rows="9" cols="70">RESULT
+</textarea>
+</div>
+</form>
+
+<script type="text/javascript" language="javascript">
+function wordCounter(textField){
+var text=document.getElementById(textField).value;
+var words=text.split(' ');
+var numberOfWords=words.length;
+var countOneLetterWords=document.getElementById("checkIgnoreOneLetterWord").checked;
+var countStandardWords=document.getElementById("countStandardWords").checked;
+
+for(var i=0;i<words.length;i++){
+var currentWord=words[i];
+if(currentWord==""){
+numberOfWords--;
+}
+if(countOneLetterWords==true && countStandardWords==true){
+if(currentWord.length==1){
+if(currentWord.toLowerCase()!="a"){
+numberOfWords--;
+}
+}
+}
+else if(countOneLetterWords==false && countStandardWords==false){
+switch(currentWord.toLowerCase()){
+case "a":{numberOfWords--;}break;
+case "an":{numberOfWords--;}break;
+case "the":{numberOfWords--;}break;
+default:{}break;
+}
+}else if(countOneLetterWords==true && countStandardWords==false){
+
+if(currentWord.toLowerCase()=="a"){
+numberOfWords--;
+}
+else{
+switch(currentWord.toLowerCase()){
+case "a":{numberOfWords--;}break;
+case "an":{numberOfWords--;}break;
+case "the":{numberOfWords--;}break;
+default:{}break;
+}
+}
+}
+}
+result=("Number of words in your text = "+numberOfWords);
+myform.result.value=result;
+return true;
+}
+function capWords(str){
+words = str.split(" ");
+for (i=0 ; i < words.length ; i++){
+testwd = words[i];
+firLet = testwd.substr(0,1); 
+rest = testwd.substr(1, testwd.length -1)
+words[i] = firLet.toUpperCase() + rest.toLowerCase()
+}
+document.myform.result.value = words.join(" ");
+} 
+function uniqueWordCount(text) {
+     var text1=text.toLowerCase ();
+	 var array=text1.split(" ");       
+        var outputArray = [ ]; 
+        var count = 0;  
+        var start = false; 
+          
+        for ( j = 0; j < array.length; j++) { 
+            for (  k = 0; k < outputArray.length; k++) { 
+                if (  array[j] == outputArray[k] ) { 
+                    start = true; 
+                } 
+            } 
+            count++; 
+            if (count == 1 && start == false) { 
+                outputArray.push(array[j]); 
+            } 
+            start = false; 
+            count = 0; 
+        } 
+		var x = outputArray;
+        document.myform.result.value =(x); 
+		}
+   
+ 
+		
+</script>
+</body>
+</html>
